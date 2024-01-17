@@ -32,15 +32,22 @@
     <button class="normal" :class="isDone? 'active' : 'default'" @click="btnOut" >버튼 A</button>
     <button class="normal" :class="isDone? 'active' : 'default'" @click="btnOn">버튼 B</button>
     <input v-if="show"/>
+    <Boggipost :example="example"></Boggipost>
+    <div>
+        <p>{{ example }}</p>
+    </div>
 </div>
 </template>
 <script>
+import Boggipost from './boggipost.vue';
+
 
 export default{ 
     name:'',
-    components:{},
+    components:{ Boggipost },
     data(){
         return{
+            example:'예심당',
             optoins:[
                 {v:'02', t:'서울'},
                 {v:'21', t:'부산'},
