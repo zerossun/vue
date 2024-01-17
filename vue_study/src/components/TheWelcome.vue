@@ -32,7 +32,13 @@
     <button class="normal" :class="isDone? 'active' : 'default'" @click="btnOut" >버튼 A</button>
     <button class="normal" :class="isDone? 'active' : 'default'" @click="btnOn">버튼 B</button>
     <input v-if="show"/>
-    <Boggipost :example="example"></Boggipost>
+    <!-- 하단은 자식임 -->
+    <Boggipost 
+    :example="example"
+    v-for="option in optoins"
+    :key ="option.v"
+    :t="option.t"
+    ></Boggipost>
     <div>
         <p>{{ example }}</p>
     </div>

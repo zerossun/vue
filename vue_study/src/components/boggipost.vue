@@ -3,6 +3,7 @@
     <h4>{{ title }}</h4>
     <h4>{{ example }}</h4>
     <h4>{{ sayHello }}</h4>
+    <h4>{{ option }}</h4>
     <button @click="change()">이름변경</button>
 </div>
 </template>
@@ -22,10 +23,14 @@ export default{
             // 값을 안 줌 : defualt 값이 나옴
             default:'부모가 값을 안 줄 때 자식이 내보내는 값',
         },
+        option:{
+            type:Object,
+            required:true
+        }
     },
     computed:{
         sayHello(){
-            return this.title + ' 욥욥'
+            return this.title + ' 입니당'
         }
     },
     components:{},
