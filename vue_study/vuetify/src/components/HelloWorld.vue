@@ -1,6 +1,15 @@
 <template>
-  <v-card flat title="Nutrition">
-    <template v-slot:text>
+<v-card flat title="Nutrition">
+  
+  <v-data-table
+    v-model:page="page"
+    :headers="headers"
+    :items="desserts"
+    :items-per-page="itemsPerPage"
+    :search="search"
+    readonly sortable?: boolean | undefined
+  >
+  <template v-slot:top>
       <v-text-field
         v-model="search"
         label="Search"
@@ -11,31 +20,37 @@
       ></v-text-field>
     </template>
 
-    <v-data-table
-      :headers="headers"
-      :items="desserts"
-      :search="search"
-    ></v-data-table>
-  </v-card>
+    <template v-slot:bottom>
+      <div class="text-center pt-2">
+        <v-pagination
+          v-model="page"
+          :length="pageCount"
+        ></v-pagination>
+      </div>
+    </template>
+  </v-data-table>
+</v-card>
 </template>
 
 <script>
   export default {
-    data() {
+    data () {
       return {
         search: '',
+        page: 1,
+        itemsPerPage: 10,
         headers: [
           {
             align: 'start',
             key: 'name',
-            sortable: false,
+            sortable: undefined,
             title: 'Dessert (100g serving)',
           },
-          { key: 'calories', title: 'Calories' },
-          { key: 'fat', title: 'Fat (g)' },
-          { key: 'carbs', title: 'Carbs (g)' },
-          { key: 'protein', title: 'Protein (g)' },
-          { key: 'iron', title: 'Iron (%)' },
+          { title: 'Calories', key: 'calories' },
+          { title: 'Fat (g)', key: 'fat' },
+          { title: 'Carbs (g)', key: 'carbs' },
+          { title: 'Protein (g)', key: 'protein' },
+          { title: 'Iron (%)', key: 'iron' },
         ],
         desserts: [
           {
@@ -120,6 +135,11 @@
           },
         ],
       }
+    },
+    computed: {
+      pageCount () {
+        return Math.ceil(this.desserts.length / this.itemsPerPage)
+      },
     },
   }
 </script>
